@@ -59,26 +59,43 @@
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
 <script>
+  //creating a function to play sound
+  //here we are taking event object inside e variable
   function playSound(e){
+
+    //creating a audio variable which will have the audio element with the value of data-key attribute same as our e.keyCode i.e. , the code of key we have pressed
     let audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+
+    //creating a key variable which will have the element with class .key with the value of data-key attribute same as our e.keyCode i.e. , the code of key we have pressed
     let key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+
+    //returning null if any other key is pressed
     if(!audio) return;
 
+    //adding playing class to key to add transition
     key.classList.add('playing');
+    //setting audio time to 0 to play sound again again if we continuously press key
     audio.currentTime = 0;
+    //playing audio
     audio.play();
   }
 
+  //function for removing playing class when transition will end
   function removeTransition(e){
+    //doing nothing if event.propertyName is not transform
     if(e.propertyName !== 'transform') return;
+    //here this keyword means e.target i.e., the element whose transition has ended
     this.classList.remove('playing');
   }
 
+  //getting all keys in keys variable
   let keys = document.querySelectorAll('.key');
+  //running for each loop to add an event listener transition end to all the keys which will run removeTransition function
   keys.forEach((key)=>{
     key.addEventListener('transitionend', removeTransition);
   });
 
+  //adding an event listener to the window object, so whenever we will press any key it will call playSound function that we have created above
   window.addEventListener('keydown', playSound);
 </script>
 
