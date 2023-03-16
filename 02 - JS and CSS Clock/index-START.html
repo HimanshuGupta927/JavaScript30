@@ -71,22 +71,30 @@
   </style>
 
   <script>
+
+    //selecting hands and storing them into respective variables
     let secHand = document.querySelector('.second-hand')
     let minHand = document.querySelector('.min-hand')
     let hrHand = document.querySelector('.hour-hand')
     
+    //function to rotate hands
     function rotateHand(){
+      //creating object of Date class
       let now = new Date();
+      //using method to get seconds , minutes and hours and storing them into their respective variables
       let sec = now.getSeconds();
       let min = now.getMinutes();
       let hr = now.getHours();
 
+      //used if else to fix a bug 
+      //bug: when value of any sec , min or hr gets 0 their respective hand was getting reverse transition to get to 90deg/reset position/ 12 o'clock position
       if(sec == 0){
         secHand.style.transition = 'all 0s';
       }
       else{
         secHand.style.transition = 'all 0.5s';
       }
+      //calculating degrees for seconds hand and changing it
       let secDeg = 90 + (sec * 6);
       secHand.style.transform = `rotate(${secDeg}deg)`
       
@@ -96,6 +104,8 @@
       else{
         minHand.style.transition = 'all 0.5s';
       }
+
+      //calculating degrees for mins hand and changing it
       let minDeg = 90 + (min * 6);
       minHand.style.transform = `rotate(${minDeg}deg)` 
 
@@ -105,10 +115,13 @@
       else{
         hrHand.style.transition = 'all 0.5s';
       }
+
+      //calculating degrees for hrs hand and changing it
       let hrDeg = 90 + (hr * 30);
       hrHand.style.transform = `rotate(${hrDeg}deg)`
     }
 
+    //running rotateHand function every 1s
     setInterval(rotateHand, 1000);
   </script>
 </body>
