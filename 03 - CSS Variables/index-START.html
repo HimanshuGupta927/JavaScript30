@@ -22,12 +22,14 @@
   <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
 
   <style>
+    /* creating root variabiles */
     :root{
       --base: #ffc600;
       --spacing: 10px;
       --blur: 10px;
     }
 
+    /* assigning properties of img using variables */
     img{
       background-color: var(--base);
       padding: var(--spacing);
@@ -57,12 +59,17 @@
   </style>
 
   <script>
+    // creating a function which will update the css varibales using input
     function handleUpdate(){
+      //getting suffic from the dataset of the element being changed or mousemove, if it is not set it will be '' empty
       const suffix = this.dataset.sizing || '';
+      //setting property of root element and updating variables
       document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix)
     }
 
+    //getting node list of all the input elements
     const inputs = document.querySelectorAll('.controls input');
+    //adding event listener 'change' and 'mousemove' to all the items of node list inputs
     inputs.forEach((input)=>{
       input.addEventListener('mousemove', handleUpdate)
       input.addEventListener('change', handleUpdate)
