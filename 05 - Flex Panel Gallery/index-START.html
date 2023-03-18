@@ -133,26 +133,34 @@
   </div>
 
   <script>
-    let panels = document.querySelectorAll('.panel')
-
+    
+    //function below toggles open class to grow and shrink flex
     function toggleOpen(e){
       this.classList.toggle('open');
+      //this is done to shrink other panel if they have open class
       panels.forEach((panel)=>{
         if(panel != this){
-          panel.classList.remove('open')
+          panel.classList.remove('open');
         }
-      })
+      });
     }
-
+    
+    //this function toggles open-active class which add text
     function toggleActive(e){
       if(e.propertyName.includes('flex')){
-        this.classList.toggle('open-active')
+        this.classList.toggle('open-active');
       }
-
     }
+    
+    //getting all elements with class panel in panles variable
+    let panels = document.querySelectorAll('.panel');
+
+    //adding event listener to all the elements of panels variable
     panels.forEach((panel)=> {
-      panel.addEventListener('click', toggleOpen)
-      panel.addEventListener('transitionend', toggleActive)
+      //clickevent to grow flex
+      panel.addEventListener('click', toggleOpen);
+      //transition end event to toggle text
+      panel.addEventListener('transitionend', toggleActive);
     });
   </script>
 </body>
